@@ -49,16 +49,16 @@ Add your screenshots inside the `screenshots` folder and reference them like thi
 
 
 <p float="left">
-  <img src="screenshots/tela_branco.png.png" width="200"/>
-  <img src="screenshots/tela_escura.png.png" width="200"/>
-<img src="screenshots/tela_escura2.png.png" width="200"/>
-  <img src="screenshots/tela_istorico.png.png" width="200"/>
+  <img src="screenshots/tela_branco.png" width="200"/>
+  <img src="screenshots/tela_escura.png" width="200"/>
+<img src="screenshots/tela_escura2.png" width="200"/>
+  <img src="screenshots/tela_istorico.png" width="200"/>
 </p>
 
 ## 🎥 App Demo
 
 <p align="center">
-  <img src="screenshots/calculator_demo.gif" width="250"/>
+  <img src="screenshots/calculador_video.gif" width="250"/>
 </p>
 
 
