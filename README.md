@@ -58,7 +58,7 @@ Add your screenshots inside the `screenshots` folder and reference them like thi
 ## 🎥 App Demo
 
 <p align="center">
-  <img src="screenshots/calculador_video.gif" width="250"/>
+  <img src="screenshots/calculador_video.mp4" width="250"/>
 </p>
 
 
