@@ -62,7 +62,8 @@ import com.example.calculador11.viewmodel.AppViewModel
 fun CalculadorContentScreen() {
     val viewModel: AppViewModel = viewModel()
     val history by viewModel.history.collectAsState()
-    // displayText interno não é usado diretamente na UI, mas podemos manter se necessário
+    // Coleta o texto formatado como State
+    val formattedDisplayText by viewModel.formattedDisplayText.collectAsState()
 
     var showHistory by remember { mutableStateOf(false) }
     val historyOffset by animateDpAsState(
@@ -119,7 +120,7 @@ fun CalculadorContentScreen() {
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Text(
-                                text = viewModel.formattedDisplayText, // texto formatado
+                                text = formattedDisplayText, // usa o valor coletado do StateFlow
                                 fontSize = 48.sp,
                                 fontWeight = FontWeight.Bold,
                                 color = textColor,
@@ -128,7 +129,7 @@ fun CalculadorContentScreen() {
                                 maxLines = 1,
                                 overflow = TextOverflow.Clip
                             )
-                            if (viewModel.formattedDisplayText.length > 15) {
+                            if (formattedDisplayText.length > 15) {
                                 Icon(
                                     imageVector = Icons.Filled.ArrowForward,
                                     contentDescription = "Mais dígitos",
@@ -148,7 +149,7 @@ fun CalculadorContentScreen() {
                             .background(MaterialTheme.colorScheme.primary)
                             .padding(10.dp),
                         columns = GridCells.Fixed(4),
-                        verticalArrangement = Arrangement.spacedBy(16.dp),
+                        verticalArrangement = Arrangement.spacedBy(10.dp),
                         horizontalArrangement = Arrangement.spacedBy(16.dp),
                         contentPadding = PaddingValues(16.dp)
                     ) {

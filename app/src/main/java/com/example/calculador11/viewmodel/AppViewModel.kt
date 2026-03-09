@@ -1,8 +1,14 @@
 package com.example.calculador11.viewmodel
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import net.objecthunter.exp4j.ExpressionBuilder
 import java.text.NumberFormat
@@ -10,18 +16,23 @@ import java.util.Locale
 
 class AppViewModel : ViewModel() {
     private val _displayText = MutableStateFlow("0")
-    val displayText = _displayText.asStateFlow()
+    val displayText: StateFlow<String> = _displayText.asStateFlow()
+
+    // StateFlow derivado que emite o texto formatado sempre que _displayText muda
+    val formattedDisplayText: StateFlow<String> = _displayText.map { internalText ->
+        formatExpressionNumbers(internalText)
+    }.stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(5000),
+        initialValue = formatExpressionNumbers(_displayText.value)
+    )
 
     private val _history = MutableStateFlow<List<String>>(emptyList())
-    val history = _history.asStateFlow()
+    val history: StateFlow<List<String>> = _history.asStateFlow()
 
     private var shouldStartNewInput = false
     private var lastResult: String? = null
     private var newInputStarted = false
-
-    // Propriedade para UI formatada
-    val formattedDisplayText: String
-        get() = formatExpressionNumbers(_displayText.value)
 
     fun inputDigit(digit: String) {
         var input = digit
@@ -29,7 +40,7 @@ class AppViewModel : ViewModel() {
         if (input == ",") input = "."
 
         if (input == ".") {
-            // Verifica se o último token já tem ponto decimal
+            // Verifica se o último token já tem ponto
             val tokens = _displayText.value.split(Regex("(?<=[+\\-x÷%])|(?=[+\\-x÷%])"))
             val lastToken = tokens.lastOrNull() ?: ""
             if (lastToken.contains(".")) {

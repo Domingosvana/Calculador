@@ -47,12 +47,20 @@ This lightweight structure focuses on clarity and simplicity rather than complex
 
 Add your screenshots inside the `screenshots` folder and reference them like this:
 
-```html
+
 <p float="left">
-  <img src="screenshots/calculator_light.png" width="200"/>
-  <img src="screenshots/calculator_dark.png" width="200"/>
+  <img src="screenshots/tela_branco.png.png" width="200"/>
+  <img src="screenshots/tela_escura.png.png" width="200"/>
+<img src="screenshots/tela_escura2.png.png" width="200"/>
+  <img src="screenshots/tela_istorico.png.png" width="200"/>
 </p>
-```
+
+## 🎥 App Demo
+
+<p align="center">
+  <img src="screenshots/calculator_demo.gif" width="250"/>
+</p>
+
 
 ---
 
